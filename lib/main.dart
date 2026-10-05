@@ -31,7 +31,7 @@ class PantallaPrincipal extends StatelessWidget {
   // -------------------------------------------------------------
   Future<void> _abrirWhatsApp(BuildContext context) async {
     // Reemplaza con un número real para la prueba
-    final String numero = "573184432832"; 
+    final String numero = "573000000000"; // Número de teléfono con código de país
     final String mensaje = "Hola, probando url_launcher desde Flutter.";
     final Uri url = Uri.parse("https://wa.me/$numero?text=${Uri.encodeComponent(mensaje)}");
 
