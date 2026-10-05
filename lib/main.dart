@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() => runApp(const MiExpoApp());
+void main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(const MiExpoApp());
+}
 
 class MiExpoApp extends StatelessWidget {
   const MiExpoApp({super.key});
@@ -27,7 +31,7 @@ class PantallaPrincipal extends StatelessWidget {
   // -------------------------------------------------------------
   Future<void> _abrirWhatsApp(BuildContext context) async {
     // Reemplaza con un número real para la prueba
-    final String numero = "573000000000"; 
+    final String numero = "573184432832"; 
     final String mensaje = "Hola, probando url_launcher desde Flutter.";
     final Uri url = Uri.parse("https://wa.me/$numero?text=${Uri.encodeComponent(mensaje)}");
 
@@ -45,8 +49,8 @@ class PantallaPrincipal extends StatelessWidget {
   // -------------------------------------------------------------
   Future<void> _enviarMensajeTelegram(BuildContext context) async {
     // TODO: Recuerda ocultar el token antes de subir a GitHub
-    final String botToken = "AQUI_TU_TOKEN"; 
-    final String chatId = "AQUI_TU_CHAT_ID";
+    final String botToken = dotenv.env['TELEGRAM_BOT_TOKEN'] ?? '';
+    final String chatId = dotenv.env['TELEGRAM_CHAT_ID'] ?? '';
     final String mensaje = "¡Hola profe! Mensaje enviado desde la app del proyecto de Sistemas 🚀";
 
     final url = Uri.parse('https://api.telegram.org/bot$botToken/sendMessage');
